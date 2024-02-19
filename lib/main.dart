@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:study_states/cart_model.dart';
 import 'package:study_states/counter_model.dart';
 import 'package:study_states/my_catalog.dart';
@@ -27,19 +28,23 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/',
+      /*initialRoute: '/',
       routes: {
         '/': (context) => const MyCatalog(),
         '/cart': (context) => MyCart(),
-      },
+      },*/
+      home: _MyHome(),
     );
   }
 }
 
-class _MyHomePageState extends State {
+class _MyHome extends StatelessWidget {
+  const _MyHome({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final CounterModel counterModel = Get.put(CounterModel());
+
     return Scaffold(
       body:  Center(
         child: Column(
@@ -48,9 +53,8 @@ class _MyHomePageState extends State {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Consumer<CounterModel>(
-                builder: (context, value, child) => Text(
-                  '${value.counter}',
+            Obx(() => Text(
+                  '${counterModel.count}',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
             ),
@@ -58,7 +62,7 @@ class _MyHomePageState extends State {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: Provider.of<CounterModel>(context, listen: false).add,
+        onPressed: counterModel.increment,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

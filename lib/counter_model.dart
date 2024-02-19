@@ -1,13 +1,9 @@
 import 'package:flutter/foundation.dart';
+import 'package:get/state_manager.dart';
 
-class CounterModel extends ChangeNotifier {
-  int _counter = 0;
+class CounterModel extends GetxController {
+  var count = 0.obs;
 
-  int get counter => _counter;
-
-  void add() {
-    _counter++;
-    notifyListeners();
-  }
+  increment() => count++;
 
 }
