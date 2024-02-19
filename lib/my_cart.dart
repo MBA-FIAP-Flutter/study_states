@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:study_states/cart_model.dart';
 import 'package:study_states/item.dart';
 import 'package:study_states/my_app_bar.dart';
+import 'package:get/get.dart';
 
 class MyCart extends StatelessWidget {
   MyCart({super.key});
@@ -11,18 +12,19 @@ class MyCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartModel cartModel = Get.find<CartModel>();
+
     return Scaffold(
       appBar: MyAppBar(
         titleTxt: "Carrinho",
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Consumer<CartModel>(
-          builder: (context, model, child) => Column(
+        child: Obx(() => Column(
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),
-                child: Text("Custo atual: ${model.totalPrice}"),
+                child: Text("Custo atual: ${cartModel.totalPrice}"),
               ),
               TextFormField (
                 controller: _controller,
@@ -30,7 +32,7 @@ class MyCart extends StatelessWidget {
               SizedBox(height: 12,),
               ElevatedButton(
                   onPressed: (){
-                    model.add(
+                    cartModel.add(
                         Item(name: _controller.text)
                     );
                     _controller.clear();
