@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/state_manager.dart';
 
-class CounterModel extends GetxController {
-  var count = 0.obs;
+class CounterModel extends Cubit<int> {
+  CounterModel() : super(0);
 
-  increment() => count++;
-
+  void increment() => emit(state + 1);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 import 'package:study_states/cart_model.dart';
@@ -23,11 +24,15 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      initialRoute: '/',
+      /*initialRoute: '/',
       routes: {
         '/': (context) => const MyCatalog(),
         '/cart': (context) => MyCart(),
-      },
+      },*/
+      home: BlocProvider(
+        create: (_) => CounterModel(),
+        child: const _MyHome(),
+      ),
     );
   }
 }
@@ -47,16 +52,17 @@ class _MyHome extends StatelessWidget {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Obx(() => Text(
-                  '${counterModel.count}',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                ),
+            BlocBuilder<CounterModel, int>(
+              builder: (context, count) => Text(
+                '${count}',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: counterModel.increment,
+        onPressed: context.read<CounterModel>().increment,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
