@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:study_states/cart_model.dart';
 import 'package:study_states/item.dart';
@@ -12,27 +13,28 @@ class MyCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CartModel cartModel = Get.find<CartModel>();
-
     return Scaffold(
-      appBar: MyAppBar(
-        titleTxt: "Carrinho",
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Obx(() => Column(
+        appBar: MyAppBar(
+          titleTxt: "Carrinho",
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
-                child: Text("Custo atual: ${cartModel.totalPrice}"),
+              BlocBuilder<CartModel, List<Item>>(
+                builder: (context, itens) =>
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: Text("Custo atual: ${context.read<CartModel>().totalPrice}"),
+                    ),
               ),
               TextFormField (
                 controller: _controller,
               ),
-              SizedBox(height: 12,),
+              const SizedBox(height: 12,),
               ElevatedButton(
                   onPressed: (){
-                    cartModel.add(
+                    context.read<CartModel>().add(
                         Item(name: _controller.text)
                     );
                     _controller.clear();
@@ -41,8 +43,7 @@ class MyCart extends StatelessWidget {
               )
             ],
           ),
-        ),
-      )
+        )
     );
   }
 }

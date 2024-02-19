@@ -9,7 +9,10 @@ import 'package:study_states/my_catalog.dart';
 import 'my_cart.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(BlocProvider(
+    create: (_) => CartModel(),
+    child: MyApp(),
+  ),);
 }
 
 class MyApp extends StatelessWidget {
@@ -24,15 +27,11 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      /*initialRoute: '/',
+      initialRoute: '/',
       routes: {
         '/': (context) => const MyCatalog(),
         '/cart': (context) => MyCart(),
-      },*/
-      home: BlocProvider(
-        create: (_) => CounterModel(),
-        child: const _MyHome(),
-      ),
+      },
     );
   }
 }
