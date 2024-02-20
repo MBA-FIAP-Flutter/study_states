@@ -14,7 +14,6 @@ class MyAppBar extends AppBar {
           },
           icon: const Icon(Icons.add),
         )
-
     ]
   );
 }

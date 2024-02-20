@@ -17,30 +17,31 @@ class MyCart extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Consumer<CartModel>(
-          builder: (context, model, child) => Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
-                child: Text("Custo atual: ${model.totalPrice}"),
-              ),
-              TextFormField (
-                controller: _controller,
-              ),
-              SizedBox(height: 12,),
-              ElevatedButton(
-                  onPressed: (){
-                    model.add(
-                        Item(name: _controller.text)
-                    );
-                    _controller.clear();
-                  },
-                  child: const Text("Inserir")
-              )
-            ],
-          ),
+        child: Column(
+          children: [
+            Consumer<CartModel>(
+              builder: (context, model, child) =>
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12.0),
+                  child: Text("Custo atual: ${model.totalPrice}"),
+                ),
+            ),
+            TextFormField (
+              controller: _controller,
+            ),
+            const SizedBox(height: 12,),
+            ElevatedButton(
+                onPressed: (){
+                  Provider.of<CartModel>(context, listen: false).add(
+                      Item(name: _controller.text)
+                  );
+                  _controller.clear();
+                },
+                child: const Text("Inserir")
+            )
+          ],
         ),
-      )
+      ),
     );
   }
 }
