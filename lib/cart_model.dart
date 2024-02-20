@@ -8,17 +8,15 @@ import 'package:study_states/item.dart';
 class CartModel extends Cubit<List<Item>> {
   CartModel() : super([]);
 
-  var items = <Item>[].obs;
+  int get totalPrice => state.length * 42;
 
-  int get totalPrice => items.length * 42;
-
-  void add(Item item) {
-    items.add(item);
-    emit(items);
+  void add(Item item){
+    List<Item> list = state.toList();
+    list.add(item);
+    emit(list);
   }
 
-  void removeAll() {
-    items.clear();
-    emit(items);
+  void removeAll(){
+    emit([]);
   }
 }
