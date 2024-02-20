@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:study_states/cart_model.dart';
-import 'package:study_states/counter_model.dart';
 import 'package:study_states/my_app_bar.dart';
 import 'package:get/get.dart';
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:study_states/cart_model.dart';
 import 'package:study_states/item.dart';
 import 'package:study_states/my_app_bar.dart';
@@ -20,11 +19,13 @@ class MyCart extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Obx(() => Column(
+        child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 12.0),
-                child: Text("Custo atual: ${cartModel.totalPrice}"),
+              Obx(() =>
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12.0),
+                  child: Text("Custo atual: ${cartModel.totalPrice}"),
+                ),
               ),
               TextFormField (
                 controller: _controller,
@@ -42,7 +43,6 @@ class MyCart extends StatelessWidget {
             ],
           ),
         ),
-      )
     );
   }
 }
