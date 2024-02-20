@@ -1,8 +1,4 @@
-import 'dart:collection';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart';
 import 'package:study_states/item.dart';
 
 class CartModel extends Cubit<List<Item>> {

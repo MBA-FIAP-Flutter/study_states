@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'package:study_states/cart_model.dart';
 import 'package:study_states/item.dart';
 import 'package:study_states/my_app_bar.dart';
-import 'package:get/get.dart';
 
 class MyCart extends StatelessWidget {
   MyCart({super.key});
