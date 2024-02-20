@@ -1,19 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:get/get.dart';
-import 'package:study_states/cart_model.dart';
 import 'package:study_states/counter_model.dart';
-import 'package:study_states/my_catalog.dart';
-
-import 'my_cart.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => CartModel(),
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -28,11 +18,6 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      /*initialRoute: '/',
-      routes: {
-        '/': (context) => const MyCatalog(),
-        '/cart': (context) => MyCart(),
-      },*/
       home: _MyHome(),
     );
   }
@@ -46,6 +31,9 @@ class _MyHome extends StatelessWidget {
     final CounterModel counterModel = Get.put(CounterModel());
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Counter"),
+      ),
       body:  Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
